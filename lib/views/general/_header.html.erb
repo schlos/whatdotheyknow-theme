@@ -6,7 +6,9 @@
             <nav>
                 <ul class="menu">
                     <%= render :partial => 'general/locale_switcher' %>
-                    <li id="ms_logo"><a class="ms_header_nav-logo" href="#about">mySociety</a></li>
+                    <%= render :partial => 'general/orglink' %>
+
+
                     <li><a class="ms_header_nav-about" href="#about">About</a></li>
                     <li><a class="ms_header_nav-blog" href="#blog">Blog</a></li>
                     <li><a class="ms_header_nav-login" href="#login">Login</a></li>
