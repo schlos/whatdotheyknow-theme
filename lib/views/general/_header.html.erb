@@ -5,13 +5,7 @@
         <div class="ms_header_nav">
             <nav>
                 <ul class="menu">
-                    <li id="lang_switcher">
-                        <a href="#" data-dropdown="droplang" class="ms_header_nav-lang"><img src="/img/lang/gb.png" alt="British English"></a>
-                        <ul id="droplang" data-dropdown-content class="lang-dropdown">
-                            <li><a lang="en-gb" href="#"><img src="/img/lang/gb.png" alt="British English"> English</a></li>
-                            <li><a lang="cy" href="#"><img src="/img/lang/wales.png" alt="Welsh"> Cymraeg</a></li>
-                        </ul>
-                    </li>
+                    <%= render :partial => 'general/locale_switcher' %>
                     <li id="ms_logo"><a class="ms_header_nav-logo" href="#about">mySociety</a></li>
                     <li><a class="ms_header_nav-about" href="#about">About</a></li>
                     <li><a class="ms_header_nav-blog" href="#blog">Blog</a></li>
