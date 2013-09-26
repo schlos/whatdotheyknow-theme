@@ -1,0 +1,8 @@
+<div class="footer" id="footer">
+    <ul class="footer-nav">
+        <li><%= link_to _("Contact {{site_name}}", :site_name => site_name), help_contact_path %></li>
+        <li><a href="https://twitter.com/<%= AlaveteliConfiguration::twitter_username %>"><%= _("Follow us on twitter") %></a></li>
+        <li><a href="<%= help_privacy_path %>"><%= _("Privacy and cookies") %></a></li>
+        <%= render :partial => 'general/credits' %>
+    </ul>
+</div>
