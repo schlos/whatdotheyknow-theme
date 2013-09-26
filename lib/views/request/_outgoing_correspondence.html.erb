@@ -11,8 +11,15 @@
 
 
     <%= render :partial => 'bubble', :locals => { :body => outgoing_message.get_body_for_html_display(), :attachments => nil }  %>
-      <% if outgoing_message.status == 'ready' && !@info_request.is_external? %>
-        <strong>Warning:</strong> This message has <strong>not yet been sent</strong> for an unknown reason.
-      <% end %>
+
+      <p class="event_actions">
+        <% if outgoing_message.status == 'ready' && !@info_request.is_external? %>
+          <strong>Warning:</strong> This message has <strong>not yet been sent</strong> for an unknown reason.
+        <% end %>
+        <% if !@user.nil? && @user.admin_page_links? %>
+          <%= link_to "Admin", admin_outgoing_edit_path(outgoing_message.id) %> |
+        <% end %>
+      </p>
+
   <%- end %>
 </li>
