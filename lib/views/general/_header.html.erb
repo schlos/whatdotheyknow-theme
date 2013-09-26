@@ -60,7 +60,7 @@
             <li class="menu-search">
               <form method="post" action="<%= search_redirect_path %>">
                   <label for="search"><%= image_tag "search.png", :alt => "Search:" %></label>
-                  <%= text_field_tag 'query', params[:query] %>
+                  <%= text_field_tag 'query', params[:query], :id => "navigation_search_button" %>
                </form>
             </li>
         </ul>
