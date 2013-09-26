@@ -7,17 +7,28 @@
                 <ul class="menu">
                     <%= render :partial => 'general/locale_switcher' %>
                     <%= render :partial => 'general/orglink' %>
-
-
                     <li><a class="ms_header_nav-about" href="<%= help_about_path %>"><%= _("About") %></a></li>
                     <li><a class="ms_header_nav-blog" href="<%= blog_path %>"><%= _("Blog") %></a></li>
-                    <li><a class="ms_header_nav-login" href="<%= signin_path(:r => request.fullpath) %>"><%= _("Login") %></a></li>
+
                 </ul>
             </nav>
         </div>
     </div>
     <div class="logo">
         <a href="<%= frontpage_path %>"> <%= image_tag "alaveteli_logo.png", :alt => "" %></a>
+    </div>
+    <div class="login-block">
+    <% if @user %>
+        <%= _('Hello, {{username}}!', :username => h(@user.name))%>
+
+          <%=link_to _("My profile"), show_user_profile_path(:url_name => @user.url_name) %> |
+          <%=link_to _("My requests"), show_user_requests_path(:url_name => @user.url_name) %> |
+          <%=link_to _("Recent Activity"), show_user_wall_path(:url_name => @user.url_name) %> |
+          <%= link_to _("Logout"), signout_path(:r => request.fullpath) %>
+    <% else %>
+
+      <a href="<%= signin_path(:r => request.fullpath) %>"><%= _("Login") %></a>
+    <% end %>
     </div>
     <div class="main_menu">
         <ul>
