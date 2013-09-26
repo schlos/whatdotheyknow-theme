@@ -6,15 +6,17 @@
 // Foundation
 @import "foundation/foundation";
 
-// Global Styles
+// Load Modules
+
 @import "modules/mixins_helpers";
+
+// WDTK Specific - Adds mySociety logo
 @import "modules/ms_header";
-@import "modules/contact_form";
-
-
 
 @import "modules/main_menu";
+@import "modules/contact_form";
 @import "modules/request_view";
+@import "modules/footer";
 
 // Theme Styles
 
