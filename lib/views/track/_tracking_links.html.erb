@@ -16,6 +16,8 @@
     <% else %>
        <%= link_to _("Want to know what happens next? <strong>Sign up to receive copies of new messages as they arrive.</strong>"), do_track_path(track_thing) %>
     <% end %>
+  <% elsif location == 'request_list' %>
+      <%= link_to _("Get alerts on this search"), do_track_path(track_thing), {:class => "request-interactions-getupdates"} %>
   <% else %>
     <%= link_to _("Get updates"), do_track_path(track_thing), {:class => "request-interactions-getupdates"} %>
   <% end %>
