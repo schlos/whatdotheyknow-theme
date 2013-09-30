@@ -40,10 +40,10 @@
     <li class="request-actions_similar"><%= link_to _("Similar requests"), similar_request_path(@info_request.url_title) %></li>
     <li class="request-actions_report"><%= link_to _("Report this request"), new_request_report_path(:request_id => @info_request.url_title) %></li>
      <% if @info_request.comments_allowed? %>
-      <% end %>
-    <li class="request-actions_annotate">
-      <%= link_to _("Add annotation"), new_comment_url(:url_title => @info_request.url_title) %>
-    </li>
+      <li class="request-actions_annotate">
+        <%= link_to _("Add annotation"), new_comment_url(:url_title => @info_request.url_title) %>
+      </li>
+    <% end %>
 </ul>
 <ol class="request-thread">
 <% for info_request_event in @info_request_events %>
