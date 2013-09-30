@@ -16,12 +16,6 @@
 <% end %>
 
 
-<% if ( @update_status || @info_request.awaiting_description ) && ! @info_request.is_external? %>
-    <div class="describe_state_form" id="describe_state_form_1">
-    <%= render :partial => 'describe_state', :locals => { :id_suffix => "1" } %>
-    </div>
-<% end %>
-
 <header>
     <p class="request-meta subtitle">
         <%= render :partial => 'request/preamble' %>
@@ -34,6 +28,12 @@
         <li> <a href="#TODO-SetShareLink">Share</a> </li>
     </ul>
 </header>
+<% if ( @update_status || @info_request.awaiting_description ) && ! @info_request.is_external? %>
+    <div class="describe_state_form" id="describe_state_form_1">
+    <%= render :partial => 'describe_state', :locals => { :id_suffix => "1" } %>
+    </div>
+<% end %>
+
 <ul class="request-actions">
     <li class="request-actions_status"><%= render :partial => 'request/status' %></li>
     <li class="request-actions_history"><%= link_to _('Event history'), request_details_path(@info_request) %></li>
@@ -56,7 +56,13 @@
 <div class="request-user_actions">
    <%= render :partial => 'track/tracking_links', :locals => { :track_thing => @track_thing, :own_request => @info_request.user && @info_request.user == @user, :location => 'request_show_end' } %>
    <% if @user && (@info_request.is_owning_user?(@user) || @info_request.public_body.is_foi_officer?(@user) || @old_unclassified) %>
+
     <%= render :partial => 'after_actions' %>
+    <% if @info_request.awaiting_description && ! @info_request.is_external? %>
+        <div class="describe_state_form" id="describe_state_form_2">
+        <%= render :partial => 'describe_state', :locals => { :id_suffix => "2" } %>
+        </div>
+    <% end %>
    <% end %>
 
    <div class="share_options">
