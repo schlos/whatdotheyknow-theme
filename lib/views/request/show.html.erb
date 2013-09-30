@@ -58,7 +58,27 @@
    <% if @user && (@info_request.is_owning_user?(@user) || @info_request.public_body.is_foi_officer?(@user) || @old_unclassified) %>
     <%= render :partial => 'after_actions' %>
    <% end %>
+
+   <div class="share_options">
+       <div>
+           <h2>Share this request</h2>
+           <ul>
+               <li><a href="#">Twitter</a></li>
+               <li><a href="#">Google+</a></li>
+               <li><a href="#">Facebook</a></li>
+               <li><a href="#">Email to a friend</a></li>
+               <li><a href="#">Short url: mysoc.go/1gf4</a></li>
+           </ul>
+           <h2>Act on what you've learned</h2>
+           <ul>
+               <li><a href="http://www.writetothem.com">Write to your politician</a></li>
+               <li><a href="http://www.pledgebank.com">Pledge with others</a></li>
+           </ul>
+       </div>
+   </div>
 </div>
+
+
 <% if ! @info_request.is_external? %>
 <!-- Note about logging in if you are the requester or authority -->
 <% end %>
