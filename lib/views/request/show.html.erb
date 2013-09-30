@@ -52,5 +52,14 @@
     <% end %>
 <% end %>
 </ol>
+<div class="request-user_actions">
+   <%= render :partial => 'track/tracking_links', :locals => { :track_thing => @track_thing, :own_request => @info_request.user && @info_request.user == @user } %>
+   <% if @user && (@info_request.is_owning_user?(@user) || @info_request.public_body.is_foi_officer?(@user) || @old_unclassified) %>
+    <%= render :partial => 'after_actions' %>
+   <% end %>
+</div>
+<% if ! @info_request.is_external? %>
+<!-- Note about logging in if you are the requester or authority -->
+<% end %>
 
-<%= render :partial => 'after_actions' %>
+
