@@ -27,7 +27,7 @@
         <%= render :partial => 'request/preamble' %>
     </p>
     <h1 class="request-title"><%= @info_request.title %> <a class="rss_link" href="<%= do_track_path(@track_thing, 'feed') %>">RSS Feed</a></h1>
-    <ul class="request_interactions">
+    <ul class="request-interactions">
         <% if ! @info_request.is_actual_owning_user?(@user) %>
           <li><%= render :partial => 'track/tracking_links', :locals => { :track_thing => @track_thing, :own_request => @info_request.user && @info_request.user == @user, :location => 'request_show_start'  } %></li>
         <% end %>
