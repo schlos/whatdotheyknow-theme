@@ -1,42 +1,40 @@
 <%= render :partial => 'general/localised_datepicker'  %>
 
-<div id="list-filter">
-  <%= form_tag(request.path, :method => "get", :id=>"filter_requests_form") do %>
- <div class="list-filter-item search-query">
-  <%= label_tag(:query, _("Keywords"), :class=>"form_label title") %>
-  <%= text_field_tag(:query, params[:query]) %>
- </div>
- <div class="list-filter-item date-range">
-   <%= label_tag(:query, _("From"), :class=>"form_label title") %>
-   <%= text_field_tag(:request_date_after, params[:request_date_after], {:class => "use-datepicker", :size => 10, :placeholder => "Anytime"}) %>&nbsp;&nbsp;
- </div>
- <div class="list-filter-item date-range">
-   <%= label_tag(:query, _("To"), :class=>"form_label title") %>
-   <%= text_field_tag(:request_date_before, params[:request_date_before], {:class => "use-datepicker", :size => 10, :placeholder => "Anytime"}) %>
- </div>
- <div class="list-filter-item">
-  <%= submit_tag(_("Search")) %>
- </div>
- <div class="list-filter-item">
-   <h3 class="title"><%= _("Showing:") %></h3>
-     <div class="filter-request-types">
-       <% statuses = [["all", _("All Requests")],
-                         ["successful", _("Successful Requests")],
-                         ["unsuccessful", _("Unsuccessful Requests")],
-                         ["awaiting", _("Unresolved Requests")]] %>
-       <% for status, label in statuses %>
-         <% if params[:view] != status %>
-           <% if params[:controller] == "public_body" %>
-            <%= link_to label, url_for(:controller => "public_body", :action => "show", :view => status, :url_name => @public_body.url_name) + "?" + request.query_string + '#results' %>
-          <% else %>
-            <%= link_to label, url_for(:controller => "request", :action => "list", :view => status) + "?" + request.query_string + '#results' %>
-          <% end %>
-        <% else %>
-          <%= label %>
-        <% end %>
-
-      <% end %>
-    </div>
- </div>
-<% end %>
+<%= form_tag(request.path, :method => "get", :id=>"filter_requests_form") do %>
+<div class="list-filter-item search-query">
+<%= label_tag(:query, _("Keywords"), :class=>"form_label title") %>
+<%= text_field_tag(:query, params[:query]) %>
 </div>
+<div class="list-filter-item date-range">
+ <%= label_tag(:query, _("From"), :class=>"form_label title") %>
+ <%= text_field_tag(:request_date_after, params[:request_date_after], {:class => "use-datepicker", :size => 10, :placeholder => "Anytime"}) %>&nbsp;&nbsp;
+</div>
+<div class="list-filter-item date-range">
+ <%= label_tag(:query, _("To"), :class=>"form_label title") %>
+ <%= text_field_tag(:request_date_before, params[:request_date_before], {:class => "use-datepicker", :size => 10, :placeholder => "Anytime"}) %>
+</div>
+<div class="list-filter-item">
+ <%= submit_tag(_("Search")) %>
+</div>
+<div class="list-filter-item">
+ <h3 class="title"><%= _("Showing:") %></h3>
+   <div class="filter-request-types">
+     <% statuses = [["all", _("All Requests")],
+                       ["successful", _("Successful Requests")],
+                       ["unsuccessful", _("Unsuccessful Requests")],
+                       ["awaiting", _("Unresolved Requests")]] %>
+     <% for status, label in statuses %>
+       <% if params[:view] != status %>
+         <% if params[:controller] == "public_body" %>
+          <%= link_to label, url_for(:controller => "public_body", :action => "show", :view => status, :url_name => @public_body.url_name) + "?" + request.query_string + '#results' %>
+        <% else %>
+          <%= link_to label, url_for(:controller => "request", :action => "list", :view => status) + "?" + request.query_string + '#results' %>
+        <% end %>
+      <% else %>
+        <%= label %>
+      <% end %>
+
+    <% end %>
+  </div>
+</div>
+<% end %>
