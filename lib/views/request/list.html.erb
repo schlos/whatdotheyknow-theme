@@ -6,7 +6,9 @@
         </li>
     </ul>
 </header>
-<%= render :partial => 'request/request_filter_form' %>
+<div id="list-filter">
+  <%= render :partial => 'request/request_filter_form' %>
+</div>
 <div class="results_section">
   <% # TODO: Cache for 5 minutes %>
   <% if @list_results.empty? %>
