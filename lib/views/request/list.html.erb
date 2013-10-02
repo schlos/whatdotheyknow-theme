@@ -1,7 +1,9 @@
 <header>
     <h1><%= @title %></h1>
     <ul class="request-interactions">
-        <li><%= render :partial => 'track/tracking_links', :locals => { :track_thing => @track_thing, :own_request => false, :location => 'request_list' } %></li>
+        <li>
+        <%= track_link(@user, @track_thing, _("Get alerts on this search"), _("Unsubscribe"), request, {:class => "request-interactions-getupdates"}) %>
+        </li>
     </ul>
 </header>
 <%= render :partial => 'request/request_filter_form' %>
