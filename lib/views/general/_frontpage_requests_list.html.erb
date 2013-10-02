@@ -1,0 +1,23 @@
+<ol class="request-thread">
+    <% for event in @request_events %>
+        <li class="outgoing correspondence">
+            <a href="<%= request_path event.info_request %>">
+                <div class="correspondence-meta">
+                    <strong><%= event.letterhead_from %></strong>
+                    <date><%= simple_date(event.created_at) %></date>
+                </div>
+                <div class="correspondence_text excerpt">
+                    <p><%= excerpt(event.search_text_main(true), "", 200) %></p>
+                </div> <!-- .correspondence_text .excerpt -->
+            </a>
+        </li>
+    <% end %>
+</ol>
+
+<p>
+    <% if @request_events_all_successful %>
+        <%=link_to _('More successful requests...'), request_list_successful_path %>
+    <% else %>
+        <%=link_to _('More requests...'), request_list_all_path %>
+    <% end %>
+</p>
