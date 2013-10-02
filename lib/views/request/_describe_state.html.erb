@@ -44,12 +44,6 @@
                     <label for="gone_postal<%=id_suffix%>"><%= @is_owning_user ? _('They are going to reply <strong>by post</strong>') : _('A response will be sent <strong>by post</strong>') %></label>
                 </div>
 
-
-                <div>
-                    <input id="internal_review1" name="incoming_message[described_state]" value="internal_review" type="radio">
-                    <label for="internal_review1">I'm waiting for an <strong>internal review</strong> response</label>
-                </div>
-
                 <% if @update_status %>
                   <div>
                      <%= radio_button "incoming_message", "described_state", "requires_admin", :id => 'requires_admin' + id_suffix %>
