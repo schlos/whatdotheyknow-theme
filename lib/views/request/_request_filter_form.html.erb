@@ -8,11 +8,11 @@
  </div>
  <div class="list-filter-item date-range">
    <%= label_tag(:query, _("From"), :class=>"form_label title") %>
-   <%= text_field_tag(:request_date_after, params[:request_date_after], {:class => "use-datepicker", :size => 10}) %>&nbsp;&nbsp;
+   <%= text_field_tag(:request_date_after, params[:request_date_after], {:class => "use-datepicker", :size => 10, :placeholder => "Anytime"}) %>&nbsp;&nbsp;
  </div>
  <div class="list-filter-item date-range">
    <%= label_tag(:query, _("To"), :class=>"form_label title") %>
-   <%= text_field_tag(:request_date_before, params[:request_date_before], {:class => "use-datepicker", :size => 10}) %>
+   <%= text_field_tag(:request_date_before, params[:request_date_before], {:class => "use-datepicker", :size => 10, :placeholder => "Anytime"}) %>
  </div>
  <div class="list-filter-item">
   <%= submit_tag(_("Search")) %>
