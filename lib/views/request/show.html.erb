@@ -23,7 +23,9 @@
     <h1 class="request-title"><%= @info_request.title %> <a class="rss_link" href="<%= do_track_path(@track_thing, 'feed') %>">RSS Feed</a></h1>
     <ul class="request-interactions">
         <% if ! @info_request.is_actual_owning_user?(@user) %>
-          <li><%= render :partial => 'track/tracking_links', :locals => { :track_thing => @track_thing, :own_request => @info_request.user && @info_request.user == @user, :location => 'request_show_start'  } %></li>
+          <li>
+            <%= track_link(@user, @track_thing, _("Get updates"), _("Unsubscribe"), request, {:class => "request-interactions-getupdates"}) %>
+          </li>
         <% end %>
         <li> <a href="#TODO-SetShareLink">Share</a> </li>
     </ul>
@@ -54,7 +56,9 @@
 <% end %>
 </ol>
 <div class="request-user_actions">
-   <%= render :partial => 'track/tracking_links', :locals => { :track_thing => @track_thing, :own_request => @info_request.user && @info_request.user == @user, :location => 'request_show_end' } %>
+  <% if ! @info_request.is_actual_owning_user?(@user) %>
+    <%= track_link(@user, @track_thing, @user ? _("Want to know what happens next? <strong>Get copies of new messages as they arrive.</strong>") : _("Want to know what happens next? <strong>Sign up to receive copies of new messages as they arrive.</strong>"), _("You currently receive copies of new messages as they arrive. <strong>Unsubscribe</strong>"), request, {:class => "request-interactions-getupdates"}) %>
+  <% end %>
    <% if @user && (@info_request.is_owning_user?(@user) || @info_request.public_body.is_foi_officer?(@user) || @old_unclassified) %>
 
     <%= render :partial => 'after_actions' %>
