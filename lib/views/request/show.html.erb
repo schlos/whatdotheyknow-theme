@@ -65,23 +65,23 @@
     <% end %>
    <% end %>
 
-   <div class="share_options">
-       <div>
-           <h2>Share this request</h2>
-           <ul>
-               <li><a href="#">Twitter</a></li>
-               <li><a href="#">Google+</a></li>
-               <li><a href="#">Facebook</a></li>
-               <li><a href="#">Email to a friend</a></li>
-               <li><a href="#">Short url: mysoc.go/1gf4</a></li>
-           </ul>
-           <h2>Act on what you've learned</h2>
-           <ul>
-               <li><a href="http://www.writetothem.com">Write to your politician</a></li>
-               <li><a href="http://www.pledgebank.com">Pledge with others</a></li>
-           </ul>
-       </div>
-   </div>
+ <div class="share_options">
+     <div>
+         <h2>Share this request</h2>
+         <ul>
+             <li><a href="<%= 'https://twitter.com/share?' + {:url => request.url, :via => AlaveteliConfiguration::twitter_username, :text => "'#{@info_request.title}'", :related => _('alaveteli_foi:The software that runs {{site_name}}', :site_name => site_name)}.to_query %>" >Twitter</a></li>
+             <li><a href="<%= 'https://plus.google.com/share?' + {:url => request.url}.to_query %>">Google+</a></li>
+             <li><a href="<%= 'http://www.facebook.com/sharer/sharer.php?' + {:u => request.url}.to_query %>">Facebook</a></li>
+             <li><a href="<%= 'mailto:?' + {:subject => @info_request.title, :body => request.url}.to_query %>">Email to a friend</a></li>
+         </ul>
+         <h2>Act on what you've learned</h2>
+         <ul>
+           <li><a href="http://www.writetothem.com">Write to your politician</a></li>
+           <li><a href="http://www.pledgebank.com">Pledge with others</a></li>
+         </ul>
+     </div>
+  </div>
+
 </div>
 
 
