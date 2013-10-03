@@ -1,0 +1,33 @@
+<%= form_for(@comment, :as => :comment, :url => { :controller => "comment", :action => "new", :type => "request" },  :html => { :id => 'comment_form' } ) do |f| %>
+    <div>
+      <p>
+        <%= _('Annotations will be posted publicly here, and are
+            <strong>not</strong> sent to {{public_body_name}}.',:public_body_name=>h(@info_request.public_body.name)) %>
+      </p>
+       <% if @info_request.is_external? %>
+        <p>
+          <%= _('Note that the requester will not be notified about your annotation, because the request was published by {{public_body_name}} on their behalf.', :public_body_name => @info_request.public_body.name) %>
+        </p>
+      <% end %>
+      <%= foi_error_messages_for :comment %>
+
+      <p>
+          <%= f.text_area :body, :rows => 10, :cols => 55 %>
+      </p>
+
+      <% if !TrackThing.find_by_existing_track(@user, track_thing) && (!@user || @info_request.user != @user) %>
+      <p>
+          <%= check_box_tag 'subscribe_to_request', "1", params[:subscribe_to_request] ? true : false %> <label for="subscribe_to_request"><%= _('Email me future updates to this request') %></label>
+      </p>
+      <% end %>
+      <%= hidden_field_tag 'submitted_comment', 1 %>
+      <%= hidden_field_tag 'preview', 1 %>
+    </div>
+    <p>
+        <a class="button-cancel-annotation" href="<%= show_request_path(@info_request.url_title) %>">Cancel</a>
+        <%= submit_tag _('Preview your annotation') %>
+    </p>
+    <p>
+      <%= _('<strong>Remember:</strong> no ranty politics, read our <a href="{{url}}">moderation policy</a>', :url => (help_requesting_path+'#moderation').html_safe) %>
+    </p>
+<% end %>
