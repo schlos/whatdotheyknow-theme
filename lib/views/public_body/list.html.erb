@@ -1,0 +1,52 @@
+<header>
+    <h1>
+      <%= n_('There is {{count}} public authority{{description}}:',
+           'There are {{count}} public authorities{{description}}:',
+           @public_bodies.total_entries,
+           :count => @public_bodies.total_entries,
+           :description => @description.blank? ? "" : " #{@description}") %>
+    </h1>
+</header>
+<div class="authority_filters">
+  <%= form_tag(list_public_bodies_default_url, :method => "get", :id=>"search_form") do %>
+
+    <div class="list-filter-item query">
+      <%= label_tag(:public_body_query, _("Search Authorities:")) %>
+      <%= text_field_tag(:public_body_query, params[:public_body_query], { :title => "type your search term here", :placeholder => "eg. ‘BBC’ or ‘Work & Pensions’" } ) %>
+    </div>
+
+    <div class="list-filter-item category">
+      <select name="public_body_category" id="public_body_category">
+        <option value=""></option>
+        <% PublicBodyCategories::get().headings().each do |heading| %>
+          <option><%= heading %></option>
+        <% end %>
+      </select>
+    </div>
+
+    <div class="list-filter-item subcategory">
+        <select name="public_body_subcategory" id="public_body_subcategory">
+            <option value="">All subcategories</option>
+            <% PublicBodyCategories::get().by_heading()['Health'].each do |tag, description| %>
+              <option value="<%= tag %>"><%= description %></option>
+            <% end %>
+        </select>
+    </div>
+
+    <div class="list-filter-item submit">
+      <%= submit_tag(_("Search")) %>
+    </div>
+
+  <% end %>
+</div>
+<div class="authority_list">
+  <%= render :partial => 'body_listing', :locals => { :public_bodies => @public_bodies } %>
+  <%= will_paginate(@public_bodies) %>
+  <p>
+    <%= link_to _("Can't find the one you want?"), help_requesting_path + '#missing_body' %>
+  </p>
+  <p>
+    <%= link_to _('List of all authorities (CSV)'), all_public_bodies_csv_path %>
+  </p>
+
+</div>

@@ -1,0 +1,9 @@
+<% if public_bodies.empty? %>
+  <p>
+    <%= _("None found.")%>
+  </p>
+<% else %>
+    <ol class="results_block">
+      <%= render :partial => 'public_body/body_listing_single', :collection => public_bodies, :as => :public_body %>
+    </ol>
+<% end %>
