@@ -16,7 +16,7 @@
     </div>
 
     <div class="list-filter-item category">
-      <select name="public_body_category" id="public_body_category">
+      <select name="public_body_heading" id="public_body_heading">
         <option value="all"></option>
         <% @headings.each do |heading| %>
           <option value="<%= heading %>"<% if heading == params[:public_body_heading] %>selected="selected"<% end %>><%= heading %></option>
@@ -25,7 +25,7 @@
     </div>
 
     <div class="list-filter-item subcategory">
-        <select name="public_body_subcategory" id="public_body_subcategory">
+        <select name="tag" id="tag">
             <option value="all">All subcategories</option>
             <% PublicBodyCategories::get().by_heading()['Health'].each do |tag, description| %>
               <option value="<%= tag %>" <% if tag == params[:tag] %>selected="selected"<% end %>><%= description %></option>
