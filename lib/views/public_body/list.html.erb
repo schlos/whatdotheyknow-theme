@@ -8,7 +8,7 @@
     </h1>
 </header>
 <div class="authority_filters">
-  <%= form_tag(list_public_bodies_default_url, :method => "get", :id=>"search_form") do %>
+  <%= form_tag(all_public_bodies_path, :method => "get", :id=>"search_form") do %>
 
     <div class="list-filter-item query">
       <%= label_tag(:public_body_query, _("Search Authorities:")) %>
@@ -17,7 +17,7 @@
 
     <div class="list-filter-item category">
       <select name="public_body_category" id="public_body_category">
-        <option value=""></option>
+        <option value="all"></option>
         <% PublicBodyCategories::get().headings().each do |heading| %>
           <option><%= heading %></option>
         <% end %>
@@ -26,7 +26,7 @@
 
     <div class="list-filter-item subcategory">
         <select name="public_body_subcategory" id="public_body_subcategory">
-            <option value="">All subcategories</option>
+            <option value="all">All subcategories</option>
             <% PublicBodyCategories::get().by_heading()['Health'].each do |tag, description| %>
               <option value="<%= tag %>"><%= description %></option>
             <% end %>
