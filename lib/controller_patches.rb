@@ -1,7 +1,7 @@
 Rails.configuration.to_prepare do
     UserController.class_eval do
         require 'survey'
-        
+
         def survey
         end
 
@@ -45,6 +45,31 @@ Rails.configuration.to_prepare do
             end
         end
 
+    end
+
+    RequestController.class_eval do
+
+        def use_pending_flash
+            if @info_request && !@info_request.new_record?
+                flash.delete(:notice)
+                flash[:pending_title] = _("Your {{law_used_full}} request has been sent on its way!",
+                                          :law_used_full=>@info_request.law_used_full)
+                flash[:pending] = _("<p><strong>We will email you</strong> when there is a response, or after
+                                    {{late_number_of_days}} working days if the authority still hasn't
+                                    replied by then.</p>
+                                    <p>If you write about this request (for example in a forum or a blog)
+                                    please link to this page, and add an annotation below telling people
+                                    about your post.</p>",
+                                    :late_number_of_days => AlaveteliConfiguration::reply_late_after_days)
+            end
+        end
+
+        def new_with_use_pending_flash
+            new_without_use_pending_flash
+            use_pending_flash
+        end
+
+        alias_method_chain :new, :use_pending_flash
     end
 
 
