@@ -18,7 +18,7 @@
     <div class="list-filter-item category">
       <select name="public_body_category" id="public_body_category">
         <option value="all"></option>
-        <% PublicBodyCategories::get().headings().each do |heading| %>
+        <% @headings.each do |heading| %>
           <option><%= heading %></option>
         <% end %>
       </select>
