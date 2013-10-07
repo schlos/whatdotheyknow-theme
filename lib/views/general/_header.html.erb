@@ -19,11 +19,11 @@
     </div>
     <div class="login-block">
     <% if @user %>
-        <%= _('Hello, {{username}}!', :username => h(@user.name))%>
+        <p class="user-greeting"><%= _('Hello, {{username}}!', :username => h(@user.name))%></p>
 
-          <%=link_to _("My profile"), show_user_profile_path(:url_name => @user.url_name) %> |
-          <%=link_to _("My requests"), show_user_requests_path(:url_name => @user.url_name) %> |
-          <%=link_to _("Recent Activity"), show_user_wall_path(:url_name => @user.url_name) %> |
+          <%=link_to _("My profile"), show_user_profile_path(:url_name => @user.url_name) %>
+          <%=link_to _("My requests"), show_user_requests_path(:url_name => @user.url_name) %>
+          <%=link_to _("Recent Activity"), show_user_wall_path(:url_name => @user.url_name) %>
           <%= link_to _("Logout"), signout_path(:r => request.fullpath) %>
     <% else %>
 
