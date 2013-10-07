@@ -23,13 +23,19 @@
         <% end %>
       </select>
     </div>
-
+    <%= javascript_tag do %>
+      tagsByHeading = <%= raw  PublicBodyCategories::get().by_heading().to_json %>
+    <% end %>
+    <%= javascript_include_tag "body-list" %>
     <div class="list-filter-item subcategory">
         <select name="tag" id="tag">
             <option value="all">All subcategories</option>
-            <% PublicBodyCategories::get().by_heading()['Health'].each do |tag, description| %>
-              <option value="<%= tag %>" <% if tag == params[:tag] %>selected="selected"<% end %>><%= description %></option>
-            <% end %>
+
+
+              <% PublicBodyCategories::get().alphabetical.each do |tag, description| %>
+                <option value="<%= tag %>" <% if tag == params[:tag] %>selected="selected"<% end %>><%= description %></option>
+              <% end %>
+
         </select>
     </div>
 
