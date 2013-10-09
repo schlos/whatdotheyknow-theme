@@ -3,36 +3,39 @@
                 :public_body => (@info_request.public_body.name)) %>
 
 <% if @info_request.prominence == 'hidden' %>
-    <p id="hidden_request">
+    <p id="hidden_request" class="hidden_request">
     <%= _('This request has prominence \'hidden\'. You can only see it because you are logged
     in as a super user.') %>
     </p>
 <% end %>
 <% if @info_request.prominence == 'requester_only' %>
-    <p id="hidden_request">
+    <p id="hidden_request" class="hidden_request">
     <%= _('This request is hidden, so that only you the requester can see it. Please
     <a href="{{url}}">contact us</a> if you are not sure why.', :url => help_requesting_path.html_safe) %>
     </p>
 <% end %>
 
 
+<header>
+    <p class="request-meta subtitle">
+        <%= render :partial => 'request/preamble' %>
+    </p>
+    <h1 class="request-title"><%= @info_request.title %> <a class="rss_link" href="<%= do_track_path(@track_thing, 'feed') %>">RSS Feed</a></h1>
+    <ul class="request-interactions">
+        <% if ! @info_request.is_actual_owning_user?(@user) %>
+          <li>
+            <%= track_link(@user, @track_thing, _("Get updates"), _("Unsubscribe"), request, {:class => "request-interactions-getupdates"}) %>
+          </li>
+        <% end %>
+        <li> <a href="#TODO-SetShareLink">Share</a> </li>
+    </ul>
+</header>
 <% if ( @update_status || @info_request.awaiting_description ) && ! @info_request.is_external? %>
     <div class="describe_state_form" id="describe_state_form_1">
     <%= render :partial => 'describe_state', :locals => { :id_suffix => "1" } %>
     </div>
 <% end %>
 
-<header>
-    <p class="request-meta subtitle">
-        <%= render :partial => 'request/preamble' %>
-    </p>
-    <h1 class="request-title"><%= @info_request.title %></h1>
-
-    <ul class="request_interactions">
-        <li> <a href="#TODO-SetUpdateLink">Get Updates</a> </li>
-        <li> <a href="#TODO-SetShareLink">Share</a> </li>
-    </ul>
-</header>
 <ul class="request-actions">
     <li class="request-actions_status"><%= render :partial => 'request/status' %></li>
     <li class="request-actions_history"><%= link_to _('Event history'), request_details_path(@info_request) %></li>
@@ -40,10 +43,10 @@
     <li class="request-actions_similar"><%= link_to _("Similar requests"), similar_request_path(@info_request.url_title) %></li>
     <li class="request-actions_report"><%= link_to _("Report this request"), new_request_report_path(:request_id => @info_request.url_title) %></li>
      <% if @info_request.comments_allowed? %>
-      <% end %>
-    <li class="request-actions_annotate">
-      <%= link_to _("Add annotation"), new_comment_url(:url_title => @info_request.url_title) %>
-    </li>
+      <li class="request-actions_annotate">
+        <%= link_to _("Add annotation"), new_comment_url(:url_title => @info_request.url_title) %>
+      </li>
+    <% end %>
 </ul>
 <ol class="request-thread">
 <% for info_request_event in @info_request_events %>
@@ -52,5 +55,42 @@
     <% end %>
 <% end %>
 </ol>
+<div class="request-user_actions">
+  <% if ! @info_request.is_actual_owning_user?(@user) %>
+    <%= track_link(@user, @track_thing, @user ? _("Want to know what happens next? <strong>Get copies of new messages as they arrive.</strong>") : _("Want to know what happens next? <strong>Sign up to receive copies of new messages as they arrive.</strong>"), _("You currently receive copies of new messages as they arrive. <strong>Unsubscribe</strong>"), request, {:class => "request-interactions-getupdates"}) %>
+  <% end %>
+   <% if @user && (@info_request.is_owning_user?(@user) || @info_request.public_body.is_foi_officer?(@user) || @old_unclassified) %>
 
-<%= render :partial => 'after_actions' %>
+    <%= render :partial => 'after_actions' %>
+    <% if @info_request.awaiting_description && ! @info_request.is_external? %>
+        <div class="describe_state_form" id="describe_state_form_2">
+        <%= render :partial => 'describe_state', :locals => { :id_suffix => "2" } %>
+        </div>
+    <% end %>
+   <% end %>
+
+ <div class="share_options">
+     <div>
+         <h2>Share this request</h2>
+         <ul>
+             <li><a href="<%= 'https://twitter.com/share?' + {:url => request.url, :via => AlaveteliConfiguration::twitter_username, :text => "'#{@info_request.title}'", :related => _('alaveteli_foi:The software that runs {{site_name}}', :site_name => site_name)}.to_query %>" >Twitter</a></li>
+             <li><a href="<%= 'https://plus.google.com/share?' + {:url => request.url}.to_query %>">Google+</a></li>
+             <li><a href="<%= 'http://www.facebook.com/sharer/sharer.php?' + {:u => request.url}.to_query %>">Facebook</a></li>
+             <li><a href="<%= 'mailto:?' + {:subject => @info_request.title, :body => request.url}.to_query %>">Email to a friend</a></li>
+         </ul>
+         <h2>Act on what you've learned</h2>
+         <ul>
+           <li><a href="http://www.writetothem.com">Write to your politician</a></li>
+           <li><a href="http://www.pledgebank.com">Pledge with others</a></li>
+         </ul>
+     </div>
+  </div>
+
+</div>
+
+
+<% if ! @info_request.is_external? %>
+<!-- Note about logging in if you are the requester or authority -->
+<% end %>
+
+

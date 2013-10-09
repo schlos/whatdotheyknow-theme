@@ -10,11 +10,14 @@
 
 @import "modules/mixins_helpers";
 
+<<<<<<< HEAD
 @import "modules/page_header";
 
 
 // WDTK Specific - Adds mySociety logo
 @import "modules/ms_header";
+=======
+>>>>>>> 44348bd9579a23f856d3fc1e801c9a902195aaee
 
 
 @import "modules/update_status_options";
@@ -24,7 +27,13 @@
 @import "modules/footer";
 @import "modules/notice_banner";
 
+<<<<<<< HEAD
 @import "modules/date_picker";
+=======
+// Theme Styles
+// WDTK Specific - Adds mySociety logo
+@import "modules/ms_header";
+>>>>>>> 44348bd9579a23f856d3fc1e801c9a902195aaee
 
 // Theme Styles
 

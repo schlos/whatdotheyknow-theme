@@ -1,0 +1,32 @@
+<% if flash[:notice] || flash[:notice_title] %>
+  <div class="notice_banner successful">
+      <% if flash[:notice_title] %>
+        <h3 class="notice_banner-title"><%= flash[:notice_title] %></h3>
+      <% end %>
+      <div class="notice_banner-content">
+          <%= flash[:notice] %>
+      </div>
+  </div>
+<% end %>
+<% if flash[:error] || flash[:error_title] %>
+  <div class="notice_banner unsuccessful">
+    <% if flash[:error_title] %>
+      <h3 class="notice_banner-title"><%= flash[:error_title] %></h3>
+    <% end %>
+      <div class="notice_banner-content">
+          <%= flash[:error] %>
+      </div>
+  </div>
+<% end %>
+<% if flash[:pending] || flash[:pending_title] %>
+  <div class="notice_banner icon-email pending">
+    <% if flash[:pending_title] %>
+      <h3 class="notice_banner-title"><%= flash[:pending_title] %></h3>
+    <% end %>
+    <% if flash[:pending] %>
+      <div class="notice_banner-content">
+        <%= flash[:pending] %>
+      </div>
+    <% end %>
+  </div>
+<% end %>

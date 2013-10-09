@@ -1,0 +1,26 @@
+<header>
+    <h1><%= @title %></h1>
+    <ul class="request-interactions">
+        <li>
+        <%= track_link(@user, @track_thing, _("Get alerts on this search"), _("Unsubscribe"), request, {:class => "request-interactions-getupdates"}) %>
+        </li>
+    </ul>
+</header>
+<div id="list-filter">
+  <%= render :partial => 'request/request_filter_form' %>
+</div>
+<div class="results_section">
+  <% # TODO: Cache for 5 minutes %>
+  <% if @list_results.empty? %>
+      <p> <%= _('No requests of this sort yet.')%></p>
+  <% else %>
+      <ol class="results_block">
+        <% for result in @list_results%>
+            <% if result.class.to_s == 'InfoRequestEvent' %>
+                <%= render :partial => 'request/request_listing_via_event', :locals => { :event => result, :info_request => result.info_request } %>
+            <% end %>
+        <% end %>
+      </ol>
+  <% end %>
+  <%= will_paginate WillPaginate::Collection.new(@page, @per_page, @show_no_more_than) %>
+</div>
