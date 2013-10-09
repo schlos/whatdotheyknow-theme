@@ -10,15 +10,33 @@
 
 @import "modules/mixins_helpers";
 
+@import "modules/page_header";
 
-@import "modules/main_menu";
-@import "modules/contact_form";
-@import "modules/request_view";
-@import "modules/footer";
 
-// Theme Styles
 // WDTK Specific - Adds mySociety logo
 @import "modules/ms_header";
 
 
+@import "modules/update_status_options";
+@import "modules/contact_form";
+@import "modules/request_filters";
+@import "modules/request_view";
+@import "modules/footer";
+@import "modules/notice_banner";
 
+@import "modules/date_picker";
+
+// Theme Styles
+
+
+//temporary styles until more bits are in place
+#content{
+    @include grid-row;
+}
+#link_box{
+    display:none;
+}
+#footer{
+    @extend .footer;
+}
+.pagination{ @include pagination; }
