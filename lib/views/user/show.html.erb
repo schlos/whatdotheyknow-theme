@@ -10,7 +10,7 @@
         <%= user_link(@same_name_user) %>
     <% end %>
     </div>
-<% end%>
+<% end %>
 
 <% if @show_profile && @is_you && @undescribed_requests.size > 0 %>
     <div class="undescribed_requests notice_banner pending">
@@ -30,110 +30,121 @@
 <% end %>
 
 <% if @show_profile %>
-<div id="user_profile_header">
+    <div id="user_profile_header">
 
-  <div class="header">
+      <div class="header">
 
-    <!--
-      <div class="header_left">
-        <p id="user_photo_on_profile">
-            <% if @display_user.profile_photo %>
-                <% if @is_you %>
-                <a href="<%= set_profile_photo_url() %>">
+        <!--
+          <div class="header_left">
+            <p id="user_photo_on_profile">
+                <% if @display_user.profile_photo %>
+                    <% if @is_you %>
+                    <a href="<%= set_profile_photo_url() %>">
+                    <% end %>
+                        <img src="<%= get_profile_photo_url(:url_name => @display_user.url_name) %>" alt="">
+                    <% if @is_you %>
+                    </a>
+                    <% end %>
+                <% else %>
+                    <% if @is_you %>
+                        <span id="set_photo">
+                            <%= link_to _('Set your profile photo'), set_profile_photo_path %>
+                        </span>
+                    <% end %>
                 <% end %>
-                    <img src="<%= get_profile_photo_url(:url_name => @display_user.url_name) %>" alt="">
-                <% if @is_you %>
-                </a>
-                <% end %>
-            <% else %>
-                <% if @is_you %>
-                    <span id="set_photo">
-                        <%= link_to _('Set your profile photo'), set_profile_photo_path %>
-                    </span>
-                <% end %>
+            </p>
+          </div>
+        -->
+
+        <h1><%= h(@display_user.name) + (@is_you ? _(" (you)") : "") %></h1>
+
+        <p class="subtitle">
+           <%= _('Joined {{site_name}} in', :site_name=>site_name) %> <%= year_from_date(@display_user.created_at) %>
+            <% if !@user.nil? && @user.admin_page_links? %>
+            (<%= link_to "admin", admin_user_show_path(@display_user) %>)
             <% end %>
         </p>
-      </div>
-    -->
 
-    <h1><%= h(@display_user.name) + (@is_you ? _(" (you)") : "") %></h1>
+        <p>
+            <%= link_to _('Send message to ') + h(@display_user.name), contact_user_path(:id => @display_user.id) %>
+            <% if @is_you %>
+                (<%= _('just to see how it works')%>)
+            <% end %>
+        </p>
 
-    <p class="subtitle">
-       <%= _('Joined {{site_name}} in', :site_name=>site_name) %> <%= year_from_date(@display_user.created_at) %>
-        <% if !@user.nil? && @user.admin_page_links? %>
-        (<%= link_to "admin", admin_user_show_path(@display_user) %>)
+        <% if @display_user.public_banned? %>
+            <div id="user_public_banned">
+                <p>
+                    <strong>
+                      <%= _('This user has been banned from {{site_name}} ', :site_name=>site_name)%>
+                    </strong>
+                </p>
+                <p>
+                   <%= _('They have been given the following explanation:')%>
+                </p>
+                <p class="details">
+                    <%= @display_user.can_fail_html %>
+                </p>
+            </div>
         <% end %>
-    </p>
 
-    <p>
-        <%= link_to _('Send message to ') + h(@display_user.name), contact_user_path(:id => @display_user.id) %>
-        <% if @is_you %>
-            (<%= _('just to see how it works')%>)
-        <% end %>
-    </p>
+        <!-- SEARCH -->
 
-    <% if @display_user.public_banned? %>
-        <div id="user_public_banned">
-            <p>
-                <strong>
-                  <%= _('This user has been banned from {{site_name}} ', :site_name=>site_name)%>
-                </strong>
-            </p>
-            <p>
-               <%= _('They have been given the following explanation:')%>
-            </p>
-            <p class="details">
-                <%= @display_user.can_fail_html %>
-            </p>
+        <!--
+        <%= form_tag(show_user_url, :method => "get", :id=>"search_form") do %>
+        <div>
+            <%= text_field_tag(:user_query, params[:user_query], {:title => "type your search term here" }) %>
+            <% if @is_you %>
+                <%= submit_tag(_("Search your requests")) %>
+            <% else %>
+                <%= submit_tag(_("Search {{user_name}}'s requests", :user_name => @display_user.name)) %>
+            <% end %>
         </div>
-    <% end %>
-
-    <!-- SEARCH -->
-
-    <!--
-    <%= form_tag(show_user_url, :method => "get", :id=>"search_form") do %>
-    <div>
-        <%= text_field_tag(:user_query, params[:user_query], {:title => "type your search term here" }) %>
-        <% if @is_you %>
-            <%= submit_tag(_("Search your requests")) %>
-        <% else %>
-            <%= submit_tag(_("Search {{user_name}}'s requests", :user_name => @display_user.name)) %>
         <% end %>
+        -->
+
+        <%= render :partial => 'user/show_user_info' %>
+
+      </div>
+
     </div>
-    <% end %>
-    -->
-
-    <%= render :partial => 'user/show_user_info' %>
-
-  </div>
-
-</div>
+<% end %>
 
 <div class="user_profile_contributions">
 
+<% if @show_profile %>
   <div class="user_track">
      <% if !@track_thing.nil? %>
        <h2><%= _('Get alerts of new requests')%></h2>
        <%= render :partial => 'track/tracking_links', :locals => { :track_thing => @track_thing, :own_request => false, :location => 'sidebar' } %>
      <% end %>
   </div>
+<% end %>
 
     <!-- REQUESTS -->
 
     <% if !@xapian_requests.nil? %>
-        <% if @xapian_requests.results.empty? %>
+        <% results = @xapian_requests.results
+           if @show_profile
+               results = results[0,3]
+           end %>
+        <% if results.empty? %>
             <% if @page == 1 %>
                 <h2><%= _('Requests') %>:</h2>
                 <p><%= @is_you ? _('You have made no Freedom of Information requests using this site.') : _('This person has made no Freedom of Information requests using this site.') %>
             <% end %>
         <% else %>
-            <h2><%= _('Requests') %><%= @match_phrase %>: <small class="requests_total"><%= @xapian_requests.matches_estimated %></small></h2>
+            <h2><%= _('Requests') %><%= @match_phrase %><%= @page_desc %>: <small class="requests_total"><%= @xapian_requests.matches_estimated %></small></h2>
             <ol>
-                <% for result in @xapian_requests.results[0,3] %>
+                <% for result in results %>
                     <%= render :partial => 'request/request_listing_user_page', :locals => { :event => result[:model], :info_request => result[:model].info_request } %>
                 <% end %>
             </ol>
-            <%= link_to _('View All Requests'), show_user_requests_path(:url_name => @display_user.url_name) %>
+            <% if @show_profile %>
+                <%= link_to _('View All Requests'), show_user_requests_path(:url_name => @display_user.url_name) %>
+            <% else %>
+                <%= will_paginate WillPaginate::Collection.new(@page, @per_page, @display_user.info_requests.size) %>
+            <% end %>
         <% end %>
     <% else %>
       <% if @show_requests %>
@@ -218,4 +229,3 @@
     <% end %>
 
 </div>
-<% end %>
