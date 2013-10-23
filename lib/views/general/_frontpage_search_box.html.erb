@@ -2,9 +2,9 @@
   <%= _("Search  <strong>{{number_of_requests}}</strong> requests and responses",
         :number_of_requests => InfoRequest.visible.count, :number_of_authorities => PublicBody.visible.count) %>
 </h2>
-<form id="search_form" method="post" action="<%= search_redirect_path %>">
+<form id="search_form" class="search_form" method="post" action="<%= search_redirect_path %>">
   <div>
-    <input id="query" type="text" size="30" name="query" title="e.g. development budget" >
-    <input type="submit" value="<%= _('Search') %>">
+    <input class="query" id="query" type="text" size="30" name="query" title="e.g. development budget" >
+    <span class="search_submit"><input type="submit" value="<%= _('Search') %>"></span>
   </div>
 </form>
