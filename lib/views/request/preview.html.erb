@@ -1,56 +1,53 @@
-<div id="request_new" class="request_new controller_request">
+<div class="notice">
+    <p><%= _('<strong>Privacy note:</strong> If you want to request private information about yourself then <a href="{{url}}">click here</a>.',
+             :url => (help_requesting_path+"#data_protection").html_safe) %>
+</div> <!-- #notice -->
 
-    <div class="notice">
-        <p><%= _('<strong>Privacy note:</strong> If you want to request private information about yourself then <a href="{{url}}">click here</a>.',
-                 :url => (help_requesting_path+"#data_protection").html_safe) %>
-    </div> <!-- #notice -->
+<%= form_for(@info_request, :url => new_request_path, :html => { :id => 'preview_form' }  ) do |f| %>
 
-    <%= form_for(@info_request, :url => new_request_path, :html => { :id => 'preview_form' }  ) do |f| %>
+    <h1><%= _('Preview of your request to {{name}}', :name => @info_request.public_body.name) %></h1>
+    <h2><%= @info_request.title %></h2>
 
-        <h1><%= _('Preview of your request to {{name}}', :name => @info_request.public_body.name) %></h1>
-        <h2><%= @info_request.title %></h2>
+    <%= fields_for :outgoing_message do |o| %>
 
-        <%= fields_for :outgoing_message do |o| %>
+    <ol class="request-thread">
+        <li class="outgoing correspondence" id="outgoing-0">
+            <h2 class="correspondence-meta">
+                <strong><% if @user %><%= @user.name %><% else %><%= _("Your name") %><% end %></strong>
+                <date><%= simple_date(DateTime.now) %></date>
+            </h2>
 
-        <ol class="request-thread">
-            <li class="outgoing correspondence" id="outgoing-0">
-                <h2 class="correspondence-meta">
-                    <strong><% if @user %><%= @user.name %><% else %><%= _("Your name") %><% end %></strong>
-                    <date><%= simple_date(DateTime.now) %></date>
-                </h2>
-
-                <div class="correspondence_text">
-                    <%= @outgoing_message.get_body_for_html_display %>
-                </div>
-                <%= o.hidden_field(:body) %>
-            </li>
-        </ol>
-
-        <% end %>
-
-        <% if !@info_request.tag_string.empty? %>
-            <p><strong><%= _('Tags:') %></strong> <%=h @info_request.tag_string %></p>
-        <% end %>
-
-        <div id="request_advice" class="new_request-advice">
-            <h3>Advice:</h3>
-            <ul>
-                <li><%= _('Check you haven\'t included any <strong>personal information</strong>.') %></li>
-                <li><%= raw(_('Your name, request and any responses will appear in <strong>search engines</strong> (<a href="{{url}}">details</a>).',
-                              :url => (help_privacy_path+"#public_request").html_safe)) %></li>
-            </ul>
-        </div> <!-- #request_advice .new_request-advice -->
-
-        <p>
-            <%= f.hidden_field(:title) %>
-            <%= f.hidden_field(:public_body_id, { :value => @info_request.public_body_id } ) %>
-            <%= f.hidden_field(:tag_string) %>
-            <%= hidden_field_tag(:submitted_new_request, 1) %>
-            <%= hidden_field_tag(:preview, 0 ) %>
-            <%= submit_tag _("Make more changes"), :name => 'reedit', :id => 'reedit_button' %>
-            <%= submit_tag _("Send your request"), :name => 'submit', :id => 'submit_button' %>
-        </p>
+            <div class="correspondence_text">
+                <%= @outgoing_message.get_body_for_html_display %>
+            </div>
+            <%= o.hidden_field(:body) %>
+        </li>
+    </ol>
 
     <% end %>
 
-</div> <!-- #request_new .request_new controller_request -->
+    <% if !@info_request.tag_string.empty? %>
+        <p><strong><%= _('Tags:') %></strong> <%=h @info_request.tag_string %></p>
+    <% end %>
+
+    <div id="request_advice" class="new_request-advice">
+        <h3>Advice:</h3>
+        <ul>
+            <li><%= _('Check you haven\'t included any <strong>personal information</strong>.') %></li>
+            <li><%= raw(_('Your name, request and any responses will appear in <strong>search engines</strong> (<a href="{{url}}">details</a>).',
+                          :url => (help_privacy_path+"#public_request").html_safe)) %></li>
+        </ul>
+    </div> <!-- #request_advice .new_request-advice -->
+
+    <p>
+        <%= f.hidden_field(:title) %>
+        <%= f.hidden_field(:public_body_id, { :value => @info_request.public_body_id } ) %>
+        <%= f.hidden_field(:tag_string) %>
+        <%= hidden_field_tag(:submitted_new_request, 1) %>
+        <%= hidden_field_tag(:preview, 0 ) %>
+        <%= submit_tag _("Make more changes"), :name => 'reedit', :id => 'reedit_button' %>
+        <%= submit_tag _("Send your request"), :name => 'submit', :id => 'submit_button' %>
+    </p>
+
+<% end %>
+
