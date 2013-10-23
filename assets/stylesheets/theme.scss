@@ -11,13 +11,21 @@
 @import "modules/mixins_helpers";
 
 @import "modules/page_header";
+@import "modules/footer";
+
 @import "modules/update_status_options";
 @import "modules/contact_form";
+@import "modules/search_form";
 @import "modules/request_filters";
+@import "modules/correspondence";
+@import "modules/share_options";
+
+@import "modules/request_select_authority";
 @import "modules/request_view";
-@import "modules/footer";
+
 @import "modules/notice_banner";
 @import "modules/date_picker";
+@import "modules/general_frontpage";
 
 
 // WDTK Specific - Adds mySociety logo
@@ -29,6 +37,7 @@
 //temporary styles until more bits are in place
 #content{
     @include grid-row;
+    padding-top:2em;
 }
 #link_box{
     display:none;
@@ -37,3 +46,16 @@
     @extend .footer;
 }
 .pagination{ @include pagination; }
+#frontpage_splash{
+    @include grid-row;
+    h1{
+        @include grid-column(12);
+        padding-left: 0.470588235em;
+        padding-right: 0.470588235em;
+        text-align: center;
+        @media (min-width: 37.5em){
+            text-align: left;
+        }
+    }
+}
+
