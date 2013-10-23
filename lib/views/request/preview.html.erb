@@ -15,7 +15,7 @@
         <ol class="request-thread">
             <li class="outgoing correspondence" id="outgoing-0">
                 <h2 class="correspondence-meta">
-                    <strong><%= @user.name %></strong>
+                    <strong><% if @user %><%= @user.name %><% else %><%= _("Your name") %><% end %></strong>
                     <date><%= simple_date(DateTime.now) %></date>
                 </h2>
 
