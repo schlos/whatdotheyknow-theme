@@ -1,28 +1,25 @@
 <% @title = _("Select the authority to write to")  %>
 
-<div id="request_select_authority" class="request_select_authority controller_request">
+<!-- <div class="request_select_authority controller_request"> -->
 
     <h1><%= _('Which part of the government are you requesting information from?') %></h1>
 
-    <div id="authority_selection">
 
-        <%= form_tag({:controller => "request", :action => "select_authority"}, {:id => "search_form", :method => "get"}) do %>
-            <div>
-                <%= text_field_tag 'query', params[:query], { :size => 30, :title => "type your search term here", :placeholder => "e.g. Ministry of Finance" } %>
-                <%= hidden_field_tag 'bodies', 1 %>
-                <%= submit_tag _('Search') %>
-            </div>
-        <% end %>
+    <%= form_tag({:controller => "request", :action => "select_authority"}, {:id => "search_form", :class => "authority_selection search_form", :method => "get"}) do %>
 
-    </div>
+        <div>
+            <%= text_field_tag 'query', params[:query], { :class => 'query', :title => "type your search term here", :placeholder => "e.g. Ministry of Finance" } %>
+            <%= hidden_field_tag 'bodies', 1 %>
+            <span class="search_submit"><%= submit_tag _('Search', { :class => ""}) %></span>
+        </div>
+
+    <% end %>
 
     <div class="request_select_authority_results">
-
-        <!-- Show the help link before a search and replace with results once they've successfully searched -->
-        <a href="<%= (help_requesting_path + '#making-requests').html_safe %>">Need help?</a>
-
         <%= render :partial => 'select_public_body_search' %>
+        <!-- Show the help link before a search and replace with results once they've successfully searched -->
+        <p class="make_request_help_link"><a href="<%= (help_requesting_path + '#making-requests').html_safe %>">Need help?</a></p>
     </div>
 
-  </div>
+  <!-- </div> -->
 
