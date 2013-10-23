@@ -1,27 +1,24 @@
 <% # TODO: Cache for 5 minutes %>
-<div id="general_frontpage" class="general_frontpage controller_general">
+<header id="frontpage_splash">
+    <h1>
+        You have a right to ask the government for information and get answers.
+        <a href="<%= help_about_path %>">Learn more…</a>
+    </h1>
+</header>
 
-    <header id="frontpage_splash">
-        <h1>
-            You have a right to ask the government for information and get answers.
-            <a href="<%= help_about_path %>">Learn more…</a>
-        </h1>
-    </header>
-
-    <div class="frontpage_actions">
-        <div class="frontpage_make_request" id="frontpage_right_to_know">
-            <a class="make_request_button" href="<%= select_authority_path %>">
-                Make a request
-            </a>
-        </div>
-
-        <div class="frontpage_search_requests" id="frontpage_search_box">
-            <%= render :partial => "frontpage_search_box" %>
-        </div> <!-- #frontpage_search_box .frontpage_search_requests -->
+<div class="frontpage_actions">
+    <div class="frontpage_make_request" id="frontpage_right_to_know">
+        <a class="make_request_button" href="<%= select_authority_path %>">
+            Make a request
+        </a>
     </div>
 
-    <div id="frontpage_examples">
-        <%= render :partial => "frontpage_requests_list" %>
-    </div>
+    <div class="frontpage_search_requests" id="frontpage_search_box">
+        <%= render :partial => "frontpage_search_box" %>
+    </div> <!-- #frontpage_search_box .frontpage_search_requests -->
+</div>
 
-</div> <!-- #general_frontpage .general_frontpage .controller_general -->
+<div id="frontpage_examples">
+    <%= render :partial => "frontpage_requests_list" %>
+</div>
+
