@@ -1,4 +1,4 @@
-<ol class="request-thread">
+<ul class="request-examples">
     <% for event in @request_events %>
         <li class="outgoing correspondence">
             <a href="<%= request_path event.info_request %>">
@@ -12,7 +12,7 @@
             </a>
         </li>
     <% end %>
-</ol>
+</ul>
 
 <p>
     <% if @request_events_all_successful %>
