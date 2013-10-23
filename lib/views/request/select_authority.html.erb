@@ -1,25 +1,21 @@
 <% @title = _("Select the authority to write to")  %>
 
-<!-- <div class="request_select_authority controller_request"> -->
-
-    <h1><%= _('Which part of the government are you requesting information from?') %></h1>
+<h1><%= _('Which part of the government are you requesting information from?') %></h1>
 
 
-    <%= form_tag({:controller => "request", :action => "select_authority"}, {:id => "search_form", :class => "authority_selection search_form", :method => "get"}) do %>
+<%= form_tag({:controller => "request", :action => "select_authority"}, {:id => "search_form", :class => "authority_selection search_form", :method => "get"}) do %>
 
-        <div>
-            <%= text_field_tag 'query', params[:query], { :class => 'query', :title => "type your search term here", :placeholder => "e.g. Ministry of Finance" } %>
-            <%= hidden_field_tag 'bodies', 1 %>
-            <span class="search_submit"><%= submit_tag _('Search', { :class => ""}) %></span>
-        </div>
-
-    <% end %>
-
-    <div class="request_select_authority_results">
-        <%= render :partial => 'select_public_body_search' %>
-        <!-- Show the help link before a search and replace with results once they've successfully searched -->
-        <p class="make_request_help_link"><a href="<%= (help_requesting_path + '#making-requests').html_safe %>">Need help?</a></p>
+    <div>
+        <%= text_field_tag 'query', params[:query], { :class => 'query', :title => "type your search term here", :placeholder => "e.g. Ministry of Finance" } %>
+        <%= hidden_field_tag 'bodies', 1 %>
+        <span class="search_submit"><%= submit_tag _('Search', { :class => ""}) %></span>
     </div>
 
-  <!-- </div> -->
+<% end %>
+
+<div class="request_select_authority_results">
+    <%= render :partial => 'select_public_body_search' %>
+    <!-- Show the help link before a search and replace with results once they've successfully searched -->
+    <p class="make_request_help_link"><a href="<%= (help_requesting_path + '#making-requests').html_safe %>">Need help?</a></p>
+</div>
 
