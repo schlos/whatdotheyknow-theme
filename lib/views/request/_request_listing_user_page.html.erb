@@ -41,7 +41,9 @@ end %>
   </div>
 
   <div class="request_preview">
-    <%= highlight_and_excerpt(event.search_text_main(true), @highlight_words, 150) %>
+    <blockquote>
+      <p><%= highlight_and_excerpt(event.search_text_main(true), @highlight_words, 150) %></p>
+    </blockquote>
   </div>
 
 </li>
