@@ -32,7 +32,7 @@
 			  <%= link_to _("Logout"), signout_path(:r => request.fullpath) %>
 		<% else %>
 
-      <%= _('Been here before?')%> <a href="<%= signin_path(:r => request.fullpath) %>"><%= _("Login") %></a>
+      <p><%= _('Been here before?')%> <a href="<%= signin_path(:r => request.fullpath) %>"><%= _("Login") %></a></p>
     <% end %>
     </div>
 
