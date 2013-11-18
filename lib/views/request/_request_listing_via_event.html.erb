@@ -2,7 +2,7 @@
       @highlight_words = []
 end %>
 
-<li class="request_listing">
+<li class="request_listing status_<%= info_request.calculate_status %>">
   <div class="request_info">
     <h3>
       <% if event.is_incoming_message? %>
@@ -33,7 +33,7 @@ end %>
     </p>
   </div>
   <div class="request_status status_<%= info_request.calculate_status %>">
-    <%= info_request.display_status(cached_value_ok=true) %>
+    <p><i></i> <%= info_request.display_status(cached_value_ok=true) %></p>
   </div>
   <div class="request_preview">
     <blockquote>
