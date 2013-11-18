@@ -1,0 +1,57 @@
+/*
+-------------------------
+Colours
+
+*/
+
+// Colour Definitions
+$c-alaveteli-red: #da5641;
+$c-alaveteli-orange: #dc9267;
+$c-alaveteli-green: #8b9352;
+$c-alaveteli-blue: #225e70;
+$c-alaveteli-purple: #906671;
+$c-alaveteli-turquoise: #67918d;
+$c-alaveteli-cream: #f2deca;
+$c-alaveteli-black: #3d3b37;
+
+// Tweaked for contrast on dark backgrounds
+$c-alaveteli-red-contrast: #da5641;
+$c-alaveteli-orange-contrast: #dc9267;
+$c-alaveteli-green-contrast: #676c47;
+$c-alaveteli-blue-contrast: #225e70;
+$c-alaveteli-purple-contrast: #906671;
+$c-alaveteli-turquoise-contrast: #67918d;
+$c-alaveteli-cream-contrast: #f8eee3;
+
+// Status Colours
+$c-success: $c-alaveteli-green;
+$c-pending: $c-alaveteli-orange;
+$c-failure: $c-alaveteli-red;
+
+// Section Colours
+$c-requests: $c-alaveteli-blue;
+$c-authorities: $c-alaveteli-purple;
+$c-users: $c-alaveteli-turquoise;
+
+// Foundation Colours
+$body-bg: #f8eee3;
+$body-font-color: $c-alaveteli-black;
+$primary-color: $c-alaveteli-blue;
+$secondary-color: $c-alaveteli-purple;
+$alert-color: $c-failure;
+$success-color: $c-success;
+
+
+/*
+Fonts
+
+
+*/
+
+$body-font-family: "ff-tisa-sans-web-pro", "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+$body-font-weight: 400;
+$body-font-style: normal;
+
+$header-font-family: "ff-tisa-sans-web-pro", "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+$header-font-weight: 700;
+$header-font-style: normal;
