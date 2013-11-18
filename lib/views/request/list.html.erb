@@ -1,8 +1,8 @@
-<header>
-    <h1><%= @title %></h1>
-    <ul class="request-interactions">
+<header class="content_header">
+    <h1 class="title"><%= @title %></h1>
+    <ul class="interactions">
         <li>
-        <%= track_link(@user, @track_thing, _("Get alerts on this search"), _("Unsubscribe"), request, {:class => "request-interactions-getupdates"}) %>
+        <%= track_link(@user, @track_thing, _("Get alerts on this search"), _("Unsubscribe"), request, {:class => "interactions-getupdates"}) %>
         </li>
     </ul>
 </header>
