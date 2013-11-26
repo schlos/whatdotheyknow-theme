@@ -48,11 +48,14 @@
 <div class="authority_list">
   <%= render :partial => 'body_listing', :locals => { :public_bodies => @public_bodies } %>
   <%= will_paginate(@public_bodies) %>
-  <p>
-    <%= link_to _("Can't find the one you want?"), help_requesting_path + '#missing_body' %>
-  </p>
-  <p>
-    <%= link_to _('List of all authorities (CSV)'), all_public_bodies_csv_path %>
-  </p>
+
+  <div class="authority_list_actions">
+    <p>
+      <%= link_to _("Can't find the one you want?"), help_requesting_path + '#missing_body' %>
+    </p>
+    <p>
+      <%= link_to _('List of all authorities (CSV)'), all_public_bodies_csv_path %>
+    </p>
+  </div>
 
 </div>
