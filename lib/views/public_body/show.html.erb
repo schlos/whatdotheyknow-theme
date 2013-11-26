@@ -1,11 +1,12 @@
 <% @title = h(@public_body.name) + _(" - view and make Freedom of Information requests") %>
-<header>
+<header class="content_header authority">
     <div>
-        <p class="authority-meta subtitle"><%= _("Freedom of information requests to:") %></p>
-        <h1 class="authority-title">
+        <p class="meta subtitle"><%= _("Freedom of information requests to:") %></p>
+        <h1 class="title">
             <%= @public_body.name %>
             <a class="rss_link" href="<%= do_track_path(@track_thing, 'feed') %>">RSS Feed</a>
         </h1>
+
         <p class="subtitle">
           <%= @public_body.type_of_authority(true) %><% if not @public_body.short_name.empty? %>,
             <%= _('also called {{public_body_short_name}}', :public_body_short_name =>  h(@public_body.short_name))%>
@@ -16,26 +17,24 @@
         </p>
         <% if !@public_body.is_requestable? %>
           <% if @public_body.not_requestable_reason == 'not_apply' %>
-              <p class="authority_notes"><%= _('Freedom of Information law does not apply to this authority, so you cannot make
-              a request to it.')%></p>
+              <div class="authority_notes"><p><%= _('Freedom of Information law does not apply to this authority, so you cannot make
+              a request to it.')%></p></div>
           <% elsif @public_body.not_requestable_reason == 'defunct' %>
-              <p class="authority_notes"><%= _('This authority no longer exists, so you cannot make a request to it.')%></p>
+              <div class="authority_notes"><p><%= _('This authority no longer exists, so you cannot make a request to it.')%></p></div>
           <% else %>
-              <p class="authority_notes"><%= _('For an unknown reason, it is not possible to make a request to this authority.')%></p>
+              <div class="authority_notes"><p><%= _('For an unknown reason, it is not possible to make a request to this authority.')%></p></div>
           <% end %>
         <% end %>
         <% if @public_body.has_notes? %>
-            <p class="authority_notes">
-              <%= @public_body.notes_as_html.html_safe %>
-            </p>
+            <div class="authority_notes">
+              <p><%= @public_body.notes_as_html.html_safe %></p>
+            </div>
         <% end %>
         <% if @public_body.eir_only? %>
-            <p class="authority_notes"><%= _('You can only request information about the environment from this authority.') %></p>
+            <div class="authority_notes"><p><%= _('You can only request information about the environment from this authority.') %></p></div>
         <% end %>
-
     </div>
-
-    <ul class="authority-interactions">
+    <ul class="interactions">
         <% if @public_body.is_requestable? || @public_body.not_requestable_reason == 'bad_contact' %>
             <li>
               <%= link_to _("Make a request to this authority <small>It’s your right!</small>"), new_request_to_body_path(:url_name => @public_body.url_name), :class => "authority-interactions-getupdates" %>
@@ -52,7 +51,7 @@
     </ul>
 </header>
 <div id="list-filter">
-  <% if  @public_body.info_requests.size > 4 %>
+  <% if  @public_body.info_requests.size > 2 %>
     <h2><%= _('Filter Requests') %></h2>
     <%= render :partial => 'request/request_filter_form' %>
     <% existing_track = TrackThing.find_by_existing_track(@user, @query_track_thing) %>
@@ -97,7 +96,7 @@
     <%= @page_desc %>
   </h2>
 
-  <div class="results_section">
+  <div class="results_section request_list <% if  @public_body.info_requests.size > 2 %>slim<% end %>">
       <% if @xapian_requests.nil? %>
         <p> <%= _('The search index is currently offline, so we can\'t show the requests that have been made to this authority.') %></p>
       <% elsif @xapian_requests.results.empty? %>

@@ -16,12 +16,12 @@
 <% end %>
 
 
-<header>
-    <p class="request-meta subtitle">
+<header class="content_header">
+    <p class="meta subtitle">
         <%= render :partial => 'request/preamble' %>
     </p>
-    <h1 class="request-title"><%= @info_request.title %> <a class="rss_link" href="<%= do_track_path(@track_thing, 'feed') %>">RSS Feed</a></h1>
-    <ul class="request-interactions">
+    <h1 class="title"><%= @info_request.title %> <a class="rss_link" href="<%= do_track_path(@track_thing, 'feed') %>">RSS Feed</a></h1>
+    <ul class="interactions">
         <% if ! @info_request.is_actual_owning_user?(@user) %>
           <li>
             <%= track_link(@user, @track_thing, _("Get updates"), _("Unsubscribe"), request, {:class => "request-interactions-getupdates"}) %>
@@ -52,9 +52,8 @@
         </ul>
     </div>
  </div>
-
+<div class="request-status"><p><%= render :partial => 'request/status' %></p></div>
 <ul class="request-actions">
-    <li class="request-actions_status"><%= render :partial => 'request/status' %></li>
     <li class="request-actions_history"><%= link_to _('Event history'), request_details_path(@info_request) %></li>
     <li class="request-actions_download"><%= link_to _("Download all"), download_entire_request_path(:url_title => @info_request.url_title) %></li>
     <li class="request-actions_similar"><%= link_to _("Similar requests"), similar_request_path(@info_request.url_title) %></li>
