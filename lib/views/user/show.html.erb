@@ -129,13 +129,16 @@
                results = results[0,3]
            end %>
         <% if results.empty? %>
+        <div class="results_section request_list">
             <% if @page == 1 %>
                 <h2><%= _('Requests') %>:</h2>
                 <p><%= @is_you ? _('You have made no Freedom of Information requests using this site.') : _('This person has made no Freedom of Information requests using this site.') %>
             <% end %>
+        </div>
         <% else %>
+        <div class="results_section request_list">
             <h2><%= _('Requests') %><%= @match_phrase %><%= @page_desc %>: <small class="requests_total"><%= @xapian_requests.matches_estimated %></small></h2>
-            <ol>
+            <ol class="results_block">
                 <% for result in results %>
                     <%= render :partial => 'request/request_listing_user_page', :locals => { :event => result[:model], :info_request => result[:model].info_request } %>
                 <% end %>
@@ -145,11 +148,14 @@
             <% else %>
                 <%= will_paginate WillPaginate::Collection.new(@page, @per_page, @display_user.info_requests.size) %>
             <% end %>
+        </div>
         <% end %>
     <% else %>
       <% if @show_requests %>
+      <div class="results_section request_list">
         <h2><%= _('Requests') %>: 0</h2>
         <p><%= _('The search index is currently offline, so we can\'t show the Freedom of Information requests this person has made.')%></p>
+      </div>
       <% end %>
     <% end %>
 
@@ -157,17 +163,21 @@
 
     <% if !@xapian_comments.nil? %>
         <% if @xapian_comments.results.empty? %>
+        <div class="results_section request_list">
             <h2><%= _('Annotations') %></h2>
             <% if @page == 1 %>
                 <p><%= _('None made.')%></p>
             <% end %>
+        </div>
         <% else %>
+        <div class="results_section request_list">
             <h2><%= _('Annotations') %>: <small class="requests_total"><%= @display_user.visible_comments.size %></small></h2>
-            <ol>
+                <ol class="results_block">
                 <% for result in @xapian_comments.results[0,3] %>
                     <%= render :partial => 'request/request_listing_user_page', :locals => { :event => result[:model], :info_request => result[:model].info_request } %>
                 <% end %>
             </ol>
+        </div>
             <!-- FIXME: need to create a view for "view all annotations" -->
             <%= link_to _('View All Annotations'), show_user_requests_path(:url_name => @display_user.url_name) %>
         <% end %>

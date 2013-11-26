@@ -52,7 +52,7 @@
         </ul>
     </div>
  </div>
-<div class="request-status"><p><%= render :partial => 'request/status' %></p></div>
+<div class="request_status"><p><%= render :partial => 'request/status' %></p></div>
 <ul class="request-actions">
     <li class="request-actions_history"><%= link_to _('Event history'), request_details_path(@info_request) %></li>
     <li class="request-actions_download"><%= link_to _("Download all"), download_entire_request_path(:url_title => @info_request.url_title) %></li>
