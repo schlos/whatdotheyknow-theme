@@ -5,22 +5,22 @@
 <li class="body_listing">
   <a href="<%= public_body_path(public_body) %>">
     <div class="body_name">
-        <%= highlight_words(public_body.name, @highlight_words) %>
+        <h3><%= highlight_words(public_body.name, @highlight_words) %></h3>
     </div>
     <div class="body_requests_total">
-        <%= n_('{{count}} request', '{{count}} requests',
+        <%= n_('<strong>{{count}}</strong> request', '<strong>{{count}}</strong> requests',
             public_body.info_requests.count,
             :count => public_body.info_requests.count) %>
     </div>
     <div class="body_desc">
-      <% if !public_body.short_name.empty? || !public_body.notes_without_html.empty? %>
+      <p><% if !public_body.short_name.empty? || !public_body.notes_without_html.empty? %>
         <% if !public_body.short_name.empty? %>
             <%= _("Also called {{other_name}}.", :other_name => highlight_words(public_body.short_name, @highlight_words)) %>
         <% end %>
         <% if !public_body.notes_without_html.empty? %>
             <%= highlight_and_excerpt(public_body.notes_without_html, @highlight_words, 150) %>
         <% end %>
-      <% end %>
+      <% end %></p>
     </div>
   </a>
 </li>
