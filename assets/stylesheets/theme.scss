@@ -10,13 +10,13 @@
 
 @import "modules/mixins_helpers";
 
+@import "modules/request_status";
 @import "modules/page_header";
 @import "modules/footer";
 @import "modules/content_header";
 
 @import "modules/update_status_options";
 @import "modules/search_form";
-@import "modules/request_filters";
 @import "modules/correspondence";
 @import "modules/share_options";
 
@@ -24,9 +24,14 @@
 @import "modules/request_view";
 @import "modules/request-user_actions";
 @import "modules/request-actions";
+
+@import "modules/request_filters";
 @import "modules/request_list";
 
 @import "modules/new_request";
+
+@import "modules/authority_filters";
+@import "modules/authority_list";
 
 @import "modules/advice";
 @import "modules/notice_banner";
@@ -41,6 +46,10 @@
 
 
 //temporary styles until more bits are in place
+
+a[href^='/user/']{ font-weight: bold; color: $c-users; }
+a[href^='/body/']{ font-weight: bold; color: $c-authorities; }
+
 #content{
     @include grid-row;
     padding-top:2em;
@@ -62,6 +71,14 @@
         @media (min-width: 37.5em){
             text-align: left;
         }
+    }
+}
+#public_body_show{
+    #list-filter{
+        @include grid-column(4);
+    }
+    #list-filter + #foi_results_section{
+        @include grid-column(8);
     }
 }
 
