@@ -6,4 +6,7 @@ Rails.application.routes.draw do
         root :to => 'user#survey', :as => :survey
         match '/reset' => 'user#survey_reset', :as => :survey_reset
     end
+
+    get '/tmp-email-alerts', :to => 'general#tmp_email_alerts', :as => 'tmp_email'
+
 end

@@ -45,6 +45,9 @@ Rails.configuration.to_prepare do
             end
         end
 
+        def tmp_email_alerts
+        end
+
     end
 
     RequestController.class_eval do
