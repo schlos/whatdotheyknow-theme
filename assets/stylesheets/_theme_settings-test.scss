@@ -29,9 +29,9 @@ $c-pending: $c-alaveteli-orange;
 $c-failure: $c-alaveteli-red;
 
 // Section Colours
-$c-requests: $c-alaveteli-blue;
-$c-authorities: $c-alaveteli-purple;
-$c-users: $c-alaveteli-turquoise;
+$c-requests: darken(#bd3213, 10%);
+$c-authorities: darken(#bd3213, 10%);
+$c-users: darken(#bd3213, 10%);
 
 // Foundation Colours
 $body-bg: #f8eee3;
@@ -55,3 +55,13 @@ $body-font-style: normal;
 $header-font-family: "ff-tisa-sans-web-pro", "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
 $header-font-weight: 700;
 $header-font-style: normal;
+
+
+/* Changes for WDTK - temporary location */
+
+/*
+page_header-settings.scss
+*/
+
+$main_menu-bg: #bd3213;
+$main_menu-link_bg: #bd3213;;
