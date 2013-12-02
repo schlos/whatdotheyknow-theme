@@ -8,6 +8,7 @@ This is the header that runs across the very top of each mySociety page
 
 .ms_header{
     margin-bottom: -3em;
+    margin-top: -4px;
 }
 
 .ms_header_nav{
@@ -20,15 +21,15 @@ This is the header that runs across the very top of each mySociety page
         }
     }
     .menu{
-        @include block-grid(5, $block-grid-default-spacing, true);
-        //@include inline-list;
+
+        @include inline-list;
     }
     li{
         //display: inline;
         text-align:center;
         font-size: 0.7em;
         padding:0;
-
+        float: right !important;
         @media #{$small} {
             font-size: 0.8em;
         }
@@ -44,9 +45,9 @@ This is the header that runs across the very top of each mySociety page
             padding: 0 0.5em;
             display:block;
             border-radius: 0 0 1.25em 1.25em;
-            color: rgba(255,255,255,0.3);
+            color: #333;
             &:hover{
-                color: rgba(255,255,255,0.8);
+                color: #000;
             }
             &.ms_header_nav-contact:hover{
                 background-color: #eeeeee;
@@ -68,8 +69,7 @@ This is the header that runs across the very top of each mySociety page
                 background-size: auto 100%;
                 line-height:2;
                 padding: 0.5em 0;
-
-
+                width: 7em;
                 @media #{$small} {
                     background-image: image-url('mysociety-header_logo.png');
                     background-size: 80% auto;
@@ -81,10 +81,11 @@ This is the header that runs across the very top of each mySociety page
             @extend .right;
             &>a{
                 @include button;
+                background-color: transparent;
                 //@include dropdown-button;
                 line-height: 1.4;
                 &:hover{
-                    background-color: lighten($primary-color, 5%);
+                    background-color: transparent;
                 }
 
             }
@@ -94,6 +95,7 @@ This is the header that runs across the very top of each mySociety page
                 li {
                     @include dropdown-style;
                     text-align: left;
+                    float: left !important;
                     a{
                         padding: 0.25em 1em;
                     }
