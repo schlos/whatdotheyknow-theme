@@ -10,13 +10,13 @@
       <p class="ui-dropdown-list-trigger en">
        <strong class="current-locale"><%= locale_name(possible_locale) %></strong>
       </p>
-     <% else %>
       <ul class="available-languages">
+     <% else %>
        <li>
         <a href="<%= url_for params.merge(:locale => possible_locale) %>"><%= locale_name(possible_locale) %></a>
        </li>
-       </ul>
      <% end %>
     <% end %>
+    </ul>
   </div>
 <% end %>
