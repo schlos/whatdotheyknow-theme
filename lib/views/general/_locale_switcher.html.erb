@@ -1,22 +1,31 @@
 <% if AlaveteliConfiguration::responsive_styling || params[:responsive] %>
-<div class="ms-header__logo">
-  <a href="http://mysociety.org">mySociety</a>
-</div>
+  <div class="ms-header__logo">
+    <a href="http://mysociety.org">mySociety</a>
+  </div>
 <% end %>
+
 <% if FastGettext.default_available_locales.length > 1 && !params.empty? %>
-  <div id="user_locale_switcher" class="ui-dropdown-list">
-    <% FastGettext.default_available_locales.each do |possible_locale| %>
-     <% if possible_locale == FastGettext.locale %>
-      <p class="ui-dropdown-list-trigger en">
-       <strong class="current-locale"><%= locale_name(possible_locale) %></strong>
-      </p>
-      <ul class="available-languages">
-     <% else %>
-       <li>
-        <a href="<%= url_for params.merge(:locale => possible_locale) %>"><%= locale_name(possible_locale) %></a>
-       </li>
-     <% end %>
+  <% locales = { :current => FastGettext.locale, :available => [] } %>
+
+  <% FastGettext.default_available_locales.each do |possible_locale| %>
+    <% if possible_locale == FastGettext.locale %>
+      <% locales[:current] = possible_locale %>
+    <% else %>
+      <% locales[:available] << possible_locale %>
     <% end %>
+  <% end %>
+
+  <div id="user_locale_switcher" class="ui-dropdown-list">
+    <p class="ui-dropdown-list-trigger <% locales[:current] %>">
+      <strong class="current-locale"><%= locale_name(locales[:current]) %></strong>
+    </p>
+
+    <ul class="available-languages">
+      <% locales[:available].each do |locale| %>
+        <li>
+          <%= link_to locale_name(locale), url_for(params.merge(:locale => locale)) %>
+        </li>
+      <% end %>
     </ul>
   </div>
 <% end %>
